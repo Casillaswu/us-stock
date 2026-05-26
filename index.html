@@ -3,216 +3,62 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>美股晨報 2026-05-26</title>
+<title>美股晨報 — 歷史紀錄</title>
 <style>
   :root {
-    --bg:        #0a0e0a;
-    --bg2:       #0f1410;
-    --bg3:       #141a14;
-    --border:    #1e2e1e;
-    --green:     #00ff41;
-    --green-dim: #00c832;
-    --green-pale:#004d18;
-    --amber:     #ffb300;
-    --red:       #ff3b3b;
-    --red-pale:  #4d0000;
-    --blue:      #00cfff;
-    --text:      #c8e6c9;
-    --text-dim:  #607060;
-    --text-muted:#3a4a3a;
-    --font-mono: 'JetBrains Mono', 'Courier New', monospace;
-    --font-sans: 'Inter', system-ui, sans-serif;
+    --bg: #0a0e0a; --bg2: #0f1410; --border: #1e2e1e;
+    --green: #00ff41; --green-dim: #00c832; --text: #c8e6c9;
+    --text-dim: #607060; --amber: #ffb300;
+    --font: 'JetBrains Mono', 'Courier New', monospace;
   }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: var(--font); min-height: 100vh; }
 
-  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;500;600&display=swap');
-
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-  body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: var(--font-mono);
-    font-size: 13px;
-    line-height: 1.6;
-    min-height: 100vh;
-  }
-
-  /* ─── HEADER ─── */
   .header {
-    background: var(--bg2);
-    border-bottom: 1px solid var(--green);
-    padding: 12px 20px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 8px;
-    position: sticky;
-    top: 0;
-    z-index: 100;
+    background: var(--bg2); border-bottom: 1px solid var(--green);
+    padding: 16px 24px; display: flex; align-items: center; gap: 16px;
   }
-  .header-left { display: flex; align-items: center; gap: 16px; }
   .logo {
-    font-size: 11px;
-    font-weight: 700;
-    color: var(--green);
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    border: 1px solid var(--green);
-    padding: 3px 8px;
+    font-size: 11px; font-weight: 700; color: var(--green);
+    letter-spacing: 3px; border: 1px solid var(--green); padding: 3px 8px;
   }
-  .header-title { font-size: 15px; font-weight: 700; color: var(--green); }
-  .header-meta {
-    font-size: 11px;
-    color: var(--text-dim);
-    display: flex;
-    gap: 16px;
-    flex-wrap: wrap;
-  }
-  .header-meta span { white-space: nowrap; }
-  .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--green); display: inline-block; margin-right: 4px; animation: blink 1.2s infinite; }
-  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+  .header-title { font-size: 16px; font-weight: 700; color: var(--green); }
 
-  /* ─── LAYOUT ─── */
-  .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
-  .section { margin-bottom: 32px; }
+  .container { max-width: 640px; margin: 40px auto; padding: 0 20px; }
+
+  .stats {
+    display: flex; gap: 24px; margin-bottom: 32px;
+    font-size: 11px; color: var(--text-dim); letter-spacing: 1px;
+  }
+  .stats span b { color: var(--green); font-size: 18px; display: block; margin-bottom: 2px; }
+
   .section-title {
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 2px;
-    color: var(--green-dim);
-    text-transform: uppercase;
-    border-bottom: 1px solid var(--border);
-    padding-bottom: 8px;
-    margin-bottom: 16px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
+    font-size: 11px; font-weight: 700; letter-spacing: 2px;
+    color: var(--green-dim); text-transform: uppercase;
+    border-bottom: 1px solid var(--border); padding-bottom: 8px; margin-bottom: 12px;
   }
-  .section-title::before { content: '//'; color: var(--text-dim); }
+  .section-title::before { content: '// '; color: var(--text-dim); }
 
-  /* ─── OPPORTUNITY CARDS ─── */
-  .cards-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-    gap: 12px;
+  .row {
+    display: flex; align-items: center; gap: 12px;
+    padding: 12px 14px; border: 1px solid var(--border);
+    margin-bottom: 6px; text-decoration: none; color: var(--text);
+    transition: border-color .15s, background .15s;
   }
-  .card {
-    background: var(--bg2);
-    border: 1px solid var(--border);
-    border-top: 2px solid var(--green-pale);
-    padding: 14px 16px;
-    transition: border-color .15s;
+  .row:hover { border-color: var(--green); background: var(--bg2); }
+  .date { font-size: 14px; font-weight: 700; color: #fff; flex: 1; }
+  .weekday { font-size: 11px; color: var(--text-dim); }
+  .new {
+    font-size: 9px; font-weight: 700; letter-spacing: 1px;
+    background: #003300; color: var(--green); border: 1px solid var(--green);
+    padding: 2px 6px;
   }
-  .card:hover { border-color: var(--green-dim); }
-  .card.signal-long  { border-top-color: var(--green); }
-  .card.signal-short { border-top-color: var(--red); }
-  .card.signal-wait  { border-top-color: var(--amber); }
+  .arrow { margin-left: auto; color: var(--text-dim); }
 
-  .card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px; }
-  .card-ticker { font-size: 18px; font-weight: 700; color: #fff; letter-spacing: 1px; }
-  .card-signal {
-    font-size: 10px; font-weight: 700; letter-spacing: 1px; padding: 3px 8px;
-    text-transform: uppercase;
-  }
-  .signal-long  .card-signal { background: #003300; color: var(--green); border: 1px solid var(--green); }
-  .signal-short .card-signal { background: var(--red-pale); color: var(--red); border: 1px solid var(--red); }
-  .signal-wait  .card-signal { background: #332500; color: var(--amber); border: 1px solid var(--amber); }
-
-  .card-edge {
-    font-size: 11px; color: var(--text-dim); margin-bottom: 10px;
-    border-left: 2px solid var(--green-pale); padding-left: 8px; line-height: 1.5;
-  }
-  .card-metrics {
-    display: grid; grid-template-columns: 1fr 1fr; gap: 6px 12px;
-    border-top: 1px solid var(--border); padding-top: 10px;
-  }
-  .metric { display: flex; flex-direction: column; gap: 2px; }
-  .metric-label { font-size: 9px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1px; }
-  .metric-value { font-size: 13px; font-weight: 500; }
-  .metric-value.entry { color: var(--blue); }
-  .metric-value.stop  { color: var(--red); }
-  .metric-value.target{ color: var(--green); }
-  .metric-value.rr    { color: var(--amber); }
-
-  .avoid-section { margin-top: 12px; }
-  .avoid-title { font-size: 10px; color: var(--red); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 6px; }
-  .avoid-list { display: flex; flex-wrap: wrap; gap: 8px; }
-  .avoid-tag {
-    background: var(--red-pale); color: var(--red); border: 1px solid #660000;
-    font-size: 11px; padding: 2px 8px;
-  }
-
-  /* ─── CHART ANALYSIS ─── */
-  .chart-block { border: 1px solid var(--border); margin-bottom: 8px; }
-  .chart-toggle {
-    width: 100%; background: var(--bg2); border: none; cursor: pointer;
-    padding: 10px 14px; display: flex; justify-content: space-between; align-items: center;
-    color: var(--text); font-family: var(--font-mono); font-size: 13px; text-align: left;
-  }
-  .chart-toggle:hover { background: var(--bg3); }
-  .chart-ticker-label { font-weight: 700; color: #fff; }
-  .chart-verdict {
-    font-size: 10px; font-weight: 700; letter-spacing: 1px; padding: 2px 8px;
-    text-transform: uppercase;
-  }
-  .verdict-buy   { background: #003300; color: var(--green); border: 1px solid var(--green); }
-  .verdict-wait  { background: #332500; color: var(--amber); border: 1px solid var(--amber); }
-  .verdict-avoid { background: var(--red-pale); color: var(--red); border: 1px solid var(--red); }
-  .chart-arrow { color: var(--text-dim); transition: transform .2s; font-size: 10px; }
-  .chart-block.open .chart-arrow { transform: rotate(90deg); }
-  .chart-body {
-    display: none; padding: 14px 16px; border-top: 1px solid var(--border);
-    background: var(--bg); line-height: 1.7;
-  }
-  .chart-block.open .chart-body { display: block; }
-  .chart-body h1,.chart-body h2,.chart-body h3 {
-    font-size: 12px; font-weight: 700; color: var(--green-dim);
-    margin: 14px 0 6px; letter-spacing: 1px; text-transform: uppercase;
-  }
-  .chart-body p  { margin-bottom: 8px; color: var(--text); }
-  .chart-body strong { color: #fff; }
-  .chart-body table {
-    width: 100%; border-collapse: collapse; margin: 10px 0; font-size: 12px;
-  }
-  .chart-body th {
-    background: var(--bg3); color: var(--text-dim); text-align: left;
-    padding: 5px 10px; border: 1px solid var(--border); font-weight: 500; font-size: 10px;
-    text-transform: uppercase; letter-spacing: 1px;
-  }
-  .chart-body td { padding: 5px 10px; border: 1px solid var(--border); }
-  .chart-body ul  { padding-left: 16px; margin-bottom: 8px; }
-  .chart-body li  { margin-bottom: 3px; }
-  .chart-body hr  { border: none; border-top: 1px solid var(--border); margin: 12px 0; }
-
-  /* ─── NEWS SECTION ─── */
-  .news-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 12px; }
-  .news-card { background: var(--bg2); border: 1px solid var(--border); padding: 12px 14px; }
-  .news-ticker { font-size: 12px; font-weight: 700; color: var(--green); margin-bottom: 8px; }
-  .news-item { margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px solid var(--border); }
-  .news-item:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
-  .news-headline { font-size: 12px; color: #fff; margin-bottom: 4px; }
-  .news-trade { font-size: 11px; color: var(--green-dim); }
-  .news-empty { color: var(--text-dim); font-size: 11px; font-style: italic; }
-
-  /* ─── FOOTER ─── */
   .footer {
-    border-top: 1px solid var(--border); padding: 12px 20px;
-    display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;
-    font-size: 10px; color: var(--text-dim); letter-spacing: 1px;
+    border-top: 1px solid var(--border); margin-top: 40px; padding: 12px 0;
+    font-size: 10px; color: var(--text-dim); text-align: center; letter-spacing: 1px;
   }
-  .footer-warning { color: #604020; }
-
-  /* ─── RESPONSIVE ─── */
-  @media (max-width: 640px) {
-    .container { padding: 12px; }
-    .header { padding: 10px 12px; }
-    .cards-grid { grid-template-columns: 1fr; }
-    .news-grid  { grid-template-columns: 1fr; }
-    .header-meta { display: none; }
-  }
-
-  /* ─── SCANLINE EFFECT ─── */
   body::after {
     content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
     background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,.03) 2px, rgba(0,0,0,.03) 4px);
@@ -221,327 +67,24 @@
 </style>
 </head>
 <body>
-
-<!-- HEADER -->
 <header class="header">
-  <div class="header-left">
-    <div class="logo">US-STOCK</div>
-    <div class="header-title">美股晨報 2026-05-26</div>
-  </div>
-  <div class="header-meta">
-    <span><span class="dot"></span>AUTO-GENERATED</span>
-    <span>WATCHLIST: 22 支</span>
-    <span>生成時間: 2026-05-26 18:24</span>
-  </div>
+  <div class="logo">US-STOCK</div>
+  <div class="header-title">美股晨報 — 歷史紀錄</div>
 </header>
-
 <div class="container">
-
-  <!-- SECTION A: 今日 5 大機會 -->
-  <section class="section">
-    <div class="section-title">今日 5 大機會 (Prompt 1)</div>
-
-    <div class="cards-grid">
-      
-      <div class="card signal-long">
-        <div class="card-header">
-          <div class="card-ticker">GOOGL</div>
-          <div class="card-signal">做多</div>
-        </div>
-        <div class="card-edge">過去一個月漲了9.3%，這週跌3.5%，市場在恐慌性獲利了結。但看周RSI仍68，SMA50支撐在341遠低於現價，真實結構未壞。當前跌破SMA20只是噪音，不是趨勢轉折。</div>
-        <div class="card-metrics">
-          <div class="metric">
-            <div class="metric-label">進場</div>
-            <div class="metric-value entry">$382.00</div>
-          </div>
-          <div class="metric">
-            <div class="metric-label">止損</div>
-            <div class="metric-value stop">$375.00</div>
-          </div>
-          <div class="metric">
-            <div class="metric-label">目標</div>
-            <div class="metric-value target">$408.61</div>
-          </div>
-          <div class="metric">
-            <div class="metric-label">風報比</div>
-            <div class="metric-value rr">1:3.7</div>
-          </div>
-        </div>
-      </div>
-      
-      <div class="card signal-long">
-        <div class="card-header">
-          <div class="card-ticker">AMZN</div>
-          <div class="card-signal">做多</div>
-        </div>
-        <div class="card-edge">AMZN在SMA20（267.1）下方僅0.3%，MACD轉負但不深（-2.1），週RSI 64仍健康。市場把它跟GOOGL一起殺，但AMZN基本面動能更強（雲業務周期回升），當前價格是錯誤連帶。</div>
-        <div class="card-metrics">
-          <div class="metric">
-            <div class="metric-label">進場</div>
-            <div class="metric-value entry">$268.50</div>
-          </div>
-          <div class="metric">
-            <div class="metric-label">止損</div>
-            <div class="metric-value stop">$262.00</div>
-          </div>
-          <div class="metric">
-            <div class="metric-label">目標</div>
-            <div class="metric-value target">$278.56</div>
-          </div>
-          <div class="metric">
-            <div class="metric-label">風報比</div>
-            <div class="metric-value rr">1:2.5</div>
-          </div>
-        </div>
-      </div>
-      
-      <div class="card signal-long">
-        <div class="card-header">
-          <div class="card-ticker">MSTR</div>
-          <div class="card-signal">做多</div>
-        </div>
-        <div class="card-edge">跌了65%離高點，RSI日線44.6、週線44.2，已進入技術超賣區。現價159.89非常接近BB下軌（153.74）與支撐（156.11）的夾層，風險有限但反彈空間大。市場在BTC情緒低迷時無差別砸殺加密相關股，但MSTR持倉並未改變，這是情緒錯價。</div>
-        <div class="card-metrics">
-          <div class="metric">
-            <div class="metric-label">進場</div>
-            <div class="metric-value entry">$158.00</div>
-          </div>
-          <div class="metric">
-            <div class="metric-label">止損</div>
-            <div class="metric-value stop">$153.00</div>
-          </div>
-          <div class="metric">
-            <div class="metric-label">目標</div>
-            <div class="metric-value target">$175.00</div>
-          </div>
-          <div class="metric">
-            <div class="metric-label">風報比</div>
-            <div class="metric-value rr">1:3.4</div>
-          </div>
-        </div>
-      </div>
-      
-      <div class="card signal-long">
-        <div class="card-header">
-          <div class="card-ticker">SMCI</div>
-          <div class="card-signal">做多</div>
-        </div>
-        <div class="card-edge">20支股票中，SMCI是唯一MACD直方圖為正值（+0.18）的票，這在一片負值中極為罕見。一個月漲27%但週RSI只有54，日RSI 64，完全沒有超買。市場低估了它的動能延續性，因為大家只記得它從62塊跌下來的故事。</div>
-        <div class="card-metrics">
-          <div class="metric">
-            <div class="metric-label">進場</div>
-            <div class="metric-value entry">$35.20</div>
-          </div>
-          <div class="metric">
-            <div class="metric-label">止損</div>
-            <div class="metric-value stop">$33.50</div>
-          </div>
-          <div class="metric">
-            <div class="metric-label">目標</div>
-            <div class="metric-value target">$37.09</div>
-          </div>
-          <div class="metric">
-            <div class="metric-label">風報比</div>
-            <div class="metric-value rr">1:2.5</div>
-          </div>
-        </div>
-      </div>
-      
-      <div class="card signal-short">
-        <div class="card-header">
-          <div class="card-ticker">META</div>
-          <div class="card-signal">做空</div>
-        </div>
-        <div class="card-edge">META是這批票中結構最壞的一支——`below_all_mas`、RSI日45週46、一個月跌10%、MACD負且持續惡化。但市場還沒完全給它定出空頭價格，因為大家還在等財報催化劑。這種等法，就是空頭的機會。</div>
-        <div class="card-metrics">
-          <div class="metric">
-            <div class="metric-label">進場</div>
-            <div class="metric-value entry">$612.00</div>
-          </div>
-          <div class="metric">
-            <div class="metric-label">止損</div>
-            <div class="metric-value stop">$622.00</div>
-          </div>
-          <div class="metric">
-            <div class="metric-label">目標</div>
-            <div class="metric-value target">$592.60</div>
-          </div>
-          <div class="metric">
-            <div class="metric-label">風報比</div>
-            <div class="metric-value rr">1:2.5</div>
-          </div>
-        </div>
-      </div>
-      
-    </div>
-
-    
-    <div class="avoid-section">
-      <div class="avoid-title">⚠ 今天不值得碰</div>
-      <div class="avoid-list">
-        
-        <div class="avoid-tag">ARM</div>
-        
-      </div>
-    </div>
-    
-  </section>
-
-  <!-- SECTION B: 每日圖表分析 -->
-  <section class="section">
-    <div class="section-title">圖表分析 (Prompt 2)</div>
-
-    
-    <div class="chart-block" id="chart-AAPL">
-      <button class="chart-toggle" onclick="toggleChart('chart-AAPL')">
-        <div style="display:flex;align-items:center;gap:12px;">
-          <span class="chart-ticker-label">AAPL</span>
-          <span style="color:var(--text-dim);font-size:11px;">$308.82</span>
-          <span style="color:var(--text-dim);font-size:11px;">+3.69% (1W)</span>
-        </div>
-        <div style="display:flex;align-items:center;gap:10px;">
-          <span class="chart-verdict verdict-wait">等等</span>
-          <span class="chart-arrow">▶</span>
-        </div>
-      </button>
-      <div class="chart-body"><h2>AAPL 技術分析報告｜2026-05-22</h2>
-<hr>
-<h3>1. 真正的買家在哪裡出現</h3>
-<p><strong>買家聚集區：264–275 區間</strong></p>
-<p>從數據推算，真實買盤出現在以下位置：</p>
-<ul>
-<li><strong>264–270</strong>：20日低點 264.83 + SMA50 270.36 重疊，這是近期最有效的支撐帶，買家在此承接且推動了後續急漲</li>
-<li><strong>270–275</strong>：SMA50 附近，這波從低點到現在漲幅接近 17%，啟動點就在這裡</li>
-</ul>
-<p><strong>量價配合的真實性判斷：</strong></p>
-<ul>
-<li>週線成交量比 10 週均量高 10%（ratio 1.1），在突破 290–295 阻力時有量支撐，這是真實的機構買盤，<strong>不是軋空</strong></li>
-<li>但日線量比 20 日均量低 10%（ratio 0.9）——<strong>越漲量越縮</strong>，這是警訊，後段漲幅缺乏新增買盤驅動</li>
-<li>結論：<strong>264–275 的買盤是真的，305 以上的買盤存疑</strong></li>
-</ul>
-<hr>
-<h3>2. 這只票在哪裡反覆失敗</h3>
-<p><strong>核心壓力位：</strong></p>
-<ul>
-<li><strong>311.40</strong>：52 週高點 = 20 日高點，雙重確認的硬頂，<strong>已兩次觸碰無法突破</strong></li>
-<li><strong>314.27</strong>：布林通道上軌，理論上方壓力，價格從未觸及，代表上漲動能已在低於此處便開始衰退</li>
-<li><strong>305–308 區間</strong>：上週收盤 308.82，本週在此盤整，<strong>連續幾日無法有效突破 311，說明這個位置買盤消化賣壓吃力</strong></li>
-</ul>
-<p><strong>動能衰減的具體位置：</strong></p>
-<ul>
-<li>從 264 到 311 這段漲幅中，價格在 300 以上開始走平，波動縮窄（上週區間 294.91–311.4，僅 16 點），<strong>漲勢明顯收斂</strong></li>
-</ul>
-<hr>
-<h3>3. 成交量 vs 價格：背離</h3>
-<p><strong>直接結論：量價背離，偏空信號</strong></p>
-<table>
-<tr><th>指標</th><th>數值</th><th>含義</th></tr>
-<tr><td>日線量比</td><td>0.9</td><td>低於均量，漲勢無量</td></tr>
-<tr><td>週線量比</td><td>1.1</td><td>略高，但不足以支撐突破新高</td></tr>
-<tr><td>價格位置</td><td>距 52W 高僅 -0.83%</td><td>在歷史高點附近</td></tr>
-</table>
-<p><strong>矛盾點：</strong></p>
-<ul>
-<li>價格創近期高（311.4），但日線成交量萎縮——<strong>量不配價，典型的頂部特徵</strong></li>
-<li>如果是健康的突破，量應該要 >1.3–1.5 倍均量，目前 0.9 說明<strong>市場參與者在高位並不積極追價</strong></li>
-<li>週線量 1.1 撐住收盤，但這更像是<strong>維持而非推進</strong></li>
-</ul>
-<hr>
-<h3>4. 趨勢健康還是快沒油了？</h3>
-<p><strong>答案：趨勢結構完整，但動能明顯減速，處於高風險區</strong></p>
-<p><strong>均線結構（多頭排列，健康）：</strong></p>
-<ul>
-<li>價格 308.82 > SMA20 289.22 > SMA50 270.36 > SMA200 261.09</li>
-<li>三條均線完美多頭排列，中長期趨勢沒有問題</li>
-</ul>
-<p><strong>RSI（超買，危險）：</strong></p>
-<ul>
-<li>日線 RSI 78.6：<strong>明確超買</strong>，歷史上超過 78 的回調機率極高</li>
-<li>週線 RSI 72.3：同樣超買，且週線超買的修正往往需要 2–4 週</li>
-<li>兩個時間框架同時超買 = <strong>不是回調警告，是強烈警告</strong></li>
-</ul>
-<p><strong>MACD（動能減速）：</strong></p>
-<ul>
-<li>MACD 柱狀體 0.9908，數</li>
-</ul>
-<hr></div>
-    </div>
-    
-    <div class="chart-block" id="chart-NVDA">
-      <button class="chart-toggle" onclick="toggleChart('chart-NVDA')">
-        <div style="display:flex;align-items:center;gap:12px;">
-          <span class="chart-ticker-label">NVDA</span>
-          <span style="color:var(--text-dim);font-size:11px;">$215.33</span>
-          <span style="color:var(--text-dim);font-size:11px;">-3.14% (1W)</span>
-        </div>
-        <div style="display:flex;align-items:center;gap:10px;">
-          <span class="chart-verdict verdict-wait">等等</span>
-          <span class="chart-arrow">▶</span>
-        </div>
-      </button>
-      <div class="chart-body"><h2>NVDA 技術分析｜2025-05-22｜$215.33</h2>
-<hr>
-<h3>1. 真正的買家在哪裡出現</h3>
-<p><strong>買盤支撐區：$194–$200</strong></p>
-<p>從20日低點$194.74到整數關口$200，這是近期最明確的承接區。價格在這裡止跌反彈，SMA50（$196.81）恰好落在此區間內，代表法人/大戶在這個位置有成本支撐，不是隨機的。</p>
-<p><strong>週線放量確認</strong>：週成交量是10週均量的1.25倍，但上週收在$215.33，距當週高點$230有明顯落差——這說明買盤在$194–$200區出現是真實的，但$225以上的量是追價盤而非底部建倉。</p>
-<p><strong>日線成交量</strong>：日線量比（1.04）幾乎等於平均，沒有明顯的恐慌性放量後吸籌的特徵，買家的出現比較溫和，不是戲劇性的V型反轉需求。</p>
-<hr>
-<h3>2. 這只票一直在哪裡失敗</h3>
-<p><strong>核心壓力位：$230–$236.54</strong></p>
-<ul>
-<li>$236.54是52週高點，也是20日高點，這是天花板</li>
-<li>上週高點衝到$230後直接回落，當週收在$215，單週跌幅超過$14，這不是整理，是拒絕</li>
-<li>$225–$230是近期反覆失守的區間，每次接近就賣壓出現</li>
-</ul>
-<p><strong>動能衰減的具體位置</strong>：$220以上開始吃力。從3個月漲幅21.53%看，主升段是從$129低點拉起來的，現在接近前高$236，邊際買家越來越少。</p>
-<hr>
-<h3>3. 成交量 vs 價格：有背離</h3>
-<p><strong>背離信號明確</strong>：</p>
-<table>
-<tr><th>指標</th><th>說明</th></tr>
-<tr><td>週線量比1.25</td><td>放量，但價格沒創新高，上週高$230 < 52週高$236.54</td></tr>
-<tr><td>日線量比1.04</td><td>量能平淡，無法支撐突破</td></tr>
-<tr><td>MACD柱狀圖負值（-0.871）</td><td>動能已轉向，MACD線低於信號線</td></tr>
-</table>
-<p><strong>結論</strong>：量先於價出現，但近期量能推不動價格突破前高，典型的<strong>高位量價背離</strong>——不是強勢繼續，是分配的前兆。</p>
-<hr>
-<h3>4. 趨勢健康還是快沒油了？</h3>
-<p><strong>結構：均線多頭排列，但動能在減速</strong></p>
-<ul>
-<li>價格站在SMA20（$214.75）、SMA50（$196.81）、SMA200（$187.02）全部之上 → 趨勢結構仍多頭</li>
-<li>但RSI日線53.7，週線62.1，<strong>都沒有超買，也沒有強勢</strong>——這是一個「動能中性偏弱」的讀數，不是健康上漲應有的65-75+</li>
-<li>MACD已經死叉（MACD 6.91 < Signal 7.78），柱狀圖連續縮減 → <strong>短期動能轉空</strong></li>
-<li>ATR $7.59代表日均波動將近3.5%，波動性高，假突破風險大</li>
-</ul>
-<p><strong>判斷</strong>：趨勢骨架還在，但引擎在熄火。不是「快沒油」，是「油門已經鬆開了」。</p>
-<hr>
-<h3>5. 最終判斷：<strong>等等</strong></h3></div>
-    </div>
-    
-  </section>
-
-  <!-- SECTION C: 本週新聞邏輯（週一才顯示） -->
+  <div class="stats">
+    <div><b>1</b>份報告</div>
+    <div><b>2026-05-26</b>最新日期</div>
+  </div>
+  <div class="section-title">選擇日期</div>
   
-
+        <a class="row" href="reports/2026-05-26.html">
+          <span class="date">2026-05-26</span>
+          <span class="weekday">週二</span>
+          <span class="new">NEW</span>
+          <span class="arrow">→</span>
+        </a>
 </div>
-
-<!-- FOOTER -->
-<footer class="footer">
-  <span>US-STOCK AUTO SYSTEM · Phase 2</span>
-  <span class="footer-warning">⚠ 本報告為輔助分析，不構成投資建議</span>
-  <span>2026-05-26 18:24</span>
-</footer>
-
-<script>
-function toggleChart(id) {
-  const el = document.getElementById(id);
-  el.classList.toggle('open');
-}
-// Auto-open all charts
-document.addEventListener('DOMContentLoaded', () => {
-  document.querySelectorAll('.chart-block').forEach(el => el.classList.add('open'));
-});
-</script>
+<footer class="footer">US-STOCK AUTO SYSTEM · casillaswu.github.io/us-stock</footer>
 </body>
 </html>
