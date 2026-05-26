@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>美股晨報 — 歷史紀錄</title>
+<style>
+  :root {
+    --bg: #0a0e0a; --bg2: #0f1410; --border: #1e2e1e;
+    --green: #00ff41; --green-dim: #00c832; --text: #c8e6c9;
+    --text-dim: #607060; --amber: #ffb300;
+    --font: 'JetBrains Mono', 'Courier New', monospace;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: var(--font); min-height: 100vh; }
+
+  .header {
+    background: var(--bg2); border-bottom: 1px solid var(--green);
+    padding: 16px 24px; display: flex; align-items: center; gap: 16px;
+  }
+  .logo {
+    font-size: 11px; font-weight: 700; color: var(--green);
+    letter-spacing: 3px; border: 1px solid var(--green); padding: 3px 8px;
+  }
+  .header-title { font-size: 16px; font-weight: 700; color: var(--green); }
+
+  .container { max-width: 640px; margin: 40px auto; padding: 0 20px; }
+
+  .stats {
+    display: flex; gap: 24px; margin-bottom: 32px;
+    font-size: 11px; color: var(--text-dim); letter-spacing: 1px;
+  }
+  .stats span b { color: var(--green); font-size: 18px; display: block; margin-bottom: 2px; }
+
+  .section-title {
+    font-size: 11px; font-weight: 700; letter-spacing: 2px;
+    color: var(--green-dim); text-transform: uppercase;
+    border-bottom: 1px solid var(--border); padding-bottom: 8px; margin-bottom: 12px;
+  }
+  .section-title::before { content: '// '; color: var(--text-dim); }
+
+  .row {
+    display: flex; align-items: center; gap: 12px;
+    padding: 12px 14px; border: 1px solid var(--border);
+    margin-bottom: 6px; text-decoration: none; color: var(--text);
+    transition: border-color .15s, background .15s;
+  }
+  .row:hover { border-color: var(--green); background: var(--bg2); }
+  .date { font-size: 14px; font-weight: 700; color: #fff; flex: 1; }
+  .weekday { font-size: 11px; color: var(--text-dim); }
+  .new {
+    font-size: 9px; font-weight: 700; letter-spacing: 1px;
+    background: #003300; color: var(--green); border: 1px solid var(--green);
+    padding: 2px 6px;
+  }
+  .arrow { margin-left: auto; color: var(--text-dim); }
+
+  .footer {
+    border-top: 1px solid var(--border); margin-top: 40px; padding: 12px 0;
+    font-size: 10px; color: var(--text-dim); text-align: center; letter-spacing: 1px;
+  }
+  body::after {
+    content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,.03) 2px, rgba(0,0,0,.03) 4px);
+    pointer-events: none; z-index: 9999;
+  }
+</style>
+</head>
+<body>
+<header class="header">
+  <div class="logo">US-STOCK</div>
+  <div class="header-title">美股晨報 — 歷史紀錄</div>
+</header>
+<div class="container">
+  <div class="stats">
+    <div><b>1</b>份報告</div>
+    <div><b>2026-05-26</b>最新日期</div>
+  </div>
+  <div class="section-title">選擇日期</div>
+  
+        <a class="row" href="reports/2026-05-26.html">
+          <span class="date">2026-05-26</span>
+          <span class="weekday">週二</span>
+          <span class="new">NEW</span>
+          <span class="arrow">→</span>
+        </a>
+</div>
+<footer class="footer">US-STOCK AUTO SYSTEM · casillaswu.github.io/us-stock</footer>
+</body>
+</html>
